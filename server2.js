@@ -53,6 +53,8 @@ const coursesData = [
   },
 ];
 
+// Query functions
+
 const getCourse = (args) => {
   const id = args.id;
   return coursesData.filter((course) => {
@@ -72,6 +74,8 @@ const getCourses = (args) => {
 const getCourseByQuote = (args) => {
   return coursesData.filter((course) => course.title.includes(args.quote));
 };
+
+// Mutation functions
 
 const updateCourseTopic = ({ id, topic }) => {
   coursesData.map((course) => {
@@ -96,6 +100,8 @@ const createCourse = (args) => {
   return coursesData;
 };
 
+// Root
+
 const root = {
   course: getCourse,
   courses: getCourses,
@@ -104,7 +110,8 @@ const root = {
   createCourse: createCourse,
 };
 
-// Create an express server and a GraphQL endpoint
+// Express server
+
 const app = express();
 app.use(
   "/graphql",
