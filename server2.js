@@ -7,6 +7,7 @@ const schema = buildSchema(`
     type Query {
         course(id: Int!): Course
         courses(topic: String): [Course]
+        getCourseByQuote(quote: String): [Course]
     },
     type Mutation {
         updateCourseTopic(id: Int!, topic: String!): Course
@@ -67,6 +68,10 @@ const getCourses = (args) => {
   }
 };
 
+const getCourseByQuote = (args) => {
+  return coursesData.filter((course) => course.title.includes(args.quote));
+};
+
 const updateCourseTopic = ({ id, topic }) => {
   coursesData.map((course) => {
     if (course.id === id) {
@@ -80,6 +85,7 @@ const updateCourseTopic = ({ id, topic }) => {
 const root = {
   course: getCourse,
   courses: getCourses,
+  getCourseByQuote: getCourseByQuote,
   updateCourseTopic: updateCourseTopic,
 };
 
